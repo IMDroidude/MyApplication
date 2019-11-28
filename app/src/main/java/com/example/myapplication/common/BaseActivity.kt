@@ -10,14 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-open class BaseActivity<T : ViewModel> : DaggerAppCompatActivity() {
+open abstract class BaseActivity<DB : ViewDataBinding,VM : ViewModel> : DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var factories: ViewModelProvider.Factory
+    lateinit var mViewModel : VM
 
-    @Inject
-    lateinit var viewModel : T
-
+    lateinit var mBinding : DB
+    abstract val layoutId : Int
 
     /*@Inject
     lateinit var viewModelFactory: ViewModelFactory*/
@@ -27,17 +26,18 @@ open class BaseActivity<T : ViewModel> : DaggerAppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        //getViewModel<T>()
         val viewModelFactory =
-            ViewModelUtil.createFor<ViewModel>(viewModel)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(viewModel::class.java)
-
+            ViewModelUtil.createFor<ViewModel>(mViewModel)
+        mViewModel = ViewModelProvider(this, viewModelFactory).get(mViewModel::class.java)
+        mBinding = DataBindingUtil.setContentView(this, layoutId)
     }
 
     inline fun <reified T : ViewDataBinding> getBinding(@LayoutRes layoutId: Int): T {
         return DataBindingUtil.setContentView(this, layoutId)
     }
 
+    /*@Inject
+    lateinit var factories: ViewModelProvider.Factory*/
     /*inline fun <reified T : ViewModel> getViewModel(): T {
         return ViewModelProvider(this, factories).get(T::class.java)
     }*/
