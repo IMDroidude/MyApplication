@@ -12,7 +12,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "quiz.mania.trivia.mcq.question"//"com.example.myapplication"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -42,11 +42,11 @@ kapt {
     generateStubs = true
     arguments {
         arg("argumentIncremental", 'true')
-        arg("generateInPackage", "com.example.myapplication.di")
+        arg("generateInPackage", "quiz.mania.trivia.mcq.question.di")
         arg("activityModuleName", "ThActivityInjector")
         arg("fragmentModuleName", "ThFragmentInjector")
         arg("vmModuleName", "ThViewModelInjector")
-        arg("viewModelKey", "com.example.myapplication.di.ViewModelKey")
+        arg("viewModelKey", "quiz.mania.trivia.mcq.question.di.ViewModelKey")
     }
 }
 

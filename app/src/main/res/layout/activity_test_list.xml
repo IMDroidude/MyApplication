@@ -7,13 +7,13 @@
 
         <variable
             name="any"
-            type="com.example.myapplication.testlit.TestListModel" />
+            type="quiz.mania.trivia.mcq.question.testlit.TestListModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".TestListActivity">
+        tools:context="quiz.mania.trivia.mcq.question.TestListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
