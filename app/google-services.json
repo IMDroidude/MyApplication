@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "218506677364",
+    "firebase_url": "https://quiz-mania-free.firebaseio.com",
+    "project_id": "quiz-mania-free",
+    "storage_bucket": "quiz-mania-free.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218506677364:android:d625de6c601f12418c1521",
+        "android_client_info": {
+          "package_name": "quiz.mania.trivia.mcq.question"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218506677364-lq7fks8fm27rg68r0vfar90ph9ojs2n6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "quiz.mania.trivia.mcq.question",
+            "certificate_hash": "8c5205c5be900459c7fc18f827712dbe5feae303"
+          }
+        },
+        {
+          "client_id": "218506677364-62k8hv35cdh480c8bigtcuv6tsc7h20u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "quiz.mania.trivia.mcq.question",
+            "certificate_hash": "d2349ac8b4605a8221ab5987ccbd040a4003eea0"
+          }
+        },
+        {
+          "client_id": "218506677364-3ojir7173qk3lppid5j0pug7o66jp4i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_aJc5fiulZFbs4L2EcLneIf_fHVKlfvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218506677364-3ojir7173qk3lppid5j0pug7o66jp4i3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

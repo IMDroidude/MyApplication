@@ -10,8 +10,10 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
+import com.google.firebase.firestore.FirebaseFirestore
 import quiz.mania.trivia.mcq.question.common.AlertStore
 import quiz.mania.trivia.mcq.question.common.BaseActivity
 import quiz.mania.trivia.mcq.question.databinding.ActivityMainBinding
@@ -42,6 +44,8 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
 
         spanTermsAndConditions()
+
+        fetchTagWithName("English")//enter any tagName
         //viewModel = ViewModelProviders.of(this,MainModelFactory(AlertStore(this@MainActivity)))[MainViewModel::class.java]
 
         //viewModel.showDialog()
@@ -51,6 +55,20 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
     override val layoutId: Int
         get() = R.layout.activity_main
+
+    private fun fetchTagWithName(tagName:String){
+
+        val db = FirebaseFirestore.getInstance()
+        db.collection("tagCollection").whereEqualTo("tagName",tagName)
+            .get().addOnSuccessListener {
+                for (document in it) {
+                    ///Log.d("any Value", "${document.id} => ${document.data}")
+                    document.data.forEach {
+                        Log.d("keyValue","${it.key} => ${it.value}")
+                    }
+                }
+            }
+    }
 
     private fun spanTermsAndConditions() {
 
