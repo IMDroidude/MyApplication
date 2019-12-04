@@ -15,12 +15,11 @@
             android:layout_marginTop="21.3dp"
             android:gravity="center"
             android:textSize="13.5sp"
+            android:visibility="gone"
             android:id="@+id/terms"
             android:textColorLink="#77c7e1"
             android:textColor="#555555"
             android:layout_height="wrap_content" android:layout_marginBottom="24dp"
-
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

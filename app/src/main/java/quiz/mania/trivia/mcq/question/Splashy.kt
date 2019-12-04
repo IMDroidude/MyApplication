@@ -5,6 +5,7 @@ import android.os.Bundle
 import quiz.mania.trivia.mcq.question.common.BaseActivity
 import quiz.mania.trivia.mcq.question.databinding.ActivitySplashyBinding
 import quiz.mania.trivia.mcq.question.ext.listen
+import quiz.mania.trivia.mcq.question.mixpanelz.AnalyticsManager
 import quiz.mania.trivia.mcq.question.splash.SplashViewModel
 
 ///@ContributesActivity
@@ -12,6 +13,8 @@ class Splashy : BaseActivity<ActivitySplashyBinding,SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AnalyticsManager(this@Splashy).trackEvent("Visited Splash");
 
         mViewModel.onMoveToNext.listen(this){
             val intent = Intent(this, it.java)

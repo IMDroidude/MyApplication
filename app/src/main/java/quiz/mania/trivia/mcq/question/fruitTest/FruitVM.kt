@@ -7,8 +7,9 @@ import quiz.mania.trivia.mcq.question.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class FruitVM : BaseViewModel() {
+class FruitVM @Inject constructor(): BaseViewModel() {
 
     private val _fruits =  MutableLiveData<List<String>>()
 

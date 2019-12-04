@@ -13,7 +13,9 @@ import quiz.mania.trivia.mcq.question.common.genericAdapter.OnAdapterBind
 import kotlinx.android.synthetic.main.activity_fruit.*
 import kotlinx.android.synthetic.main.item_fruit.view.*
 import kotlinx.coroutines.*
+import org.json.JSONObject
 import quiz.mania.trivia.mcq.question.R
+import quiz.mania.trivia.mcq.question.mixpanelz.AnalyticsManager
 
 class FruitActivity : AppCompatActivity() {
 
@@ -22,6 +24,8 @@ class FruitActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruit)
 
+
+        AnalyticsManager(this@FruitActivity).trackEvent("Visited FruitList")
 
         /*GlobalScope.launch { // launch a new coroutine in background and continue
             delay(1000L)
@@ -97,6 +101,9 @@ class FruitActivity : AppCompatActivity() {
 
                 override fun onItemClicked(position: Int, mView: View?) {
                     Toast.makeText(this@FruitActivity,"Clicked " + it.get(position), Toast.LENGTH_LONG).show()
+                    val jsonObject = JSONObject()
+                    jsonObject.put("fruitName",it.get(position))
+                    AnalyticsManager(this@FruitActivity).trackEvent("Selected Fruit",jsonObject)
                 }
             })
 

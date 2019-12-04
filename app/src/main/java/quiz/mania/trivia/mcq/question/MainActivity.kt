@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
@@ -14,10 +15,13 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.firebase.firestore.FirebaseFirestore
+import org.json.JSONObject
 import quiz.mania.trivia.mcq.question.common.AlertStore
 import quiz.mania.trivia.mcq.question.common.BaseActivity
 import quiz.mania.trivia.mcq.question.databinding.ActivityMainBinding
 import quiz.mania.trivia.mcq.question.home.MainViewModel
+import quiz.mania.trivia.mcq.question.mixpanelz.AnalyticsManager
+import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity
 import quiz.mania.trivia.mcq.question.testpackage.TestClass
 import javax.inject.Inject
 import kotlin.reflect.KClass
@@ -36,6 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
+        AnalyticsManager(this@MainActivity).trackEvent("Visited MainActivity");
+
         ///alertStore.showToast("Hello")
         testClass.getRandomValueFromCTest()
 
@@ -46,6 +52,10 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         spanTermsAndConditions()
 
         fetchTagWithName("English")//enter any tagName
+
+        Handler().postDelayed({
+            startActivity(Intent(this@MainActivity,TagSelectionActivity::class.java))
+        },2000)
         //viewModel = ViewModelProviders.of(this,MainModelFactory(AlertStore(this@MainActivity)))[MainViewModel::class.java]
 
         //viewModel.showDialog()
@@ -67,6 +77,13 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
                         Log.d("keyValue","${it.key} => ${it.value}")
                     }
                 }
+
+                val json = JSONObject()
+                json.put("key 1","value 1")
+                json.put("key 2","value 2")
+                json.put("key 3","value 3")
+                json.put("key 4","value 4")
+                AnalyticsManager(this@MainActivity).trackEvent("fetchDocument",json)
             }
     }
 

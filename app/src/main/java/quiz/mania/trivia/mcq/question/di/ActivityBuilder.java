@@ -5,6 +5,9 @@ import quiz.mania.trivia.mcq.question.Splashy;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import quiz.mania.trivia.mcq.question.TestListActivity;
+import quiz.mania.trivia.mcq.question.fruitTest.FruitActivity;
+import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity;
 
 @Module
 abstract class ActivityBuilder {
@@ -15,6 +18,15 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     public abstract Splashy bindSplashy();
+
+    @ContributesAndroidInjector
+    public abstract FruitActivity bindFruitActivity();
+
+    @ContributesAndroidInjector
+    public abstract TestListActivity bindTestListActivity();
+
+    @ContributesAndroidInjector
+    public abstract TagSelectionActivity bindTagSelectionActivity();
 }
 
 /*@Module
