@@ -2,7 +2,7 @@ package quiz.mania.trivia.mcq.question.di;
 
 import androidx.lifecycle.ViewModel;
 
-import quiz.mania.trivia.mcq.question.fruitTest.FruitVM;
+import quiz.mania.trivia.mcq.question.fruitest.FruitVM;
 import quiz.mania.trivia.mcq.question.home.MainViewModel;
 import quiz.mania.trivia.mcq.question.splash.SplashViewModel;
 

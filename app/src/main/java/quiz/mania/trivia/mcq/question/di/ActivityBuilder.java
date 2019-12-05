@@ -6,7 +6,7 @@ import quiz.mania.trivia.mcq.question.Splashy;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import quiz.mania.trivia.mcq.question.TestListActivity;
-import quiz.mania.trivia.mcq.question.fruitTest.FruitActivity;
+import quiz.mania.trivia.mcq.question.fruitest.FruitActivity;
 import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity;
 
 @Module

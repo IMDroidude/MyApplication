@@ -1,4 +1,4 @@
-package quiz.mania.trivia.mcq.question.fruitTest
+package quiz.mania.trivia.mcq.question.fruitest
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

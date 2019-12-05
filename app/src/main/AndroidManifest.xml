@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fruitTest.FruitActivity" />
+        <activity android:name=".fruitest.FruitActivity" />
 
         <activity android:name=".taglearning.TagSelectionActivity"></activity>
     </application>

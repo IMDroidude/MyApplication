@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_test_list.*
 import kotlinx.android.synthetic.main.item_test.*
 import org.json.JSONObject
 import quiz.mania.trivia.mcq.question.databinding.ActivityTestListBinding
-import quiz.mania.trivia.mcq.question.fruitTest.FruitActivity
+import quiz.mania.trivia.mcq.question.fruitest.FruitActivity
 import quiz.mania.trivia.mcq.question.mixpanelz.AnalyticsManager
 
 class TestListActivity : BaseActivity<ActivityTestListBinding, TestListModel>() {

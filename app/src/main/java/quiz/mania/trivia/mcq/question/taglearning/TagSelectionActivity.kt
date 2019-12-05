@@ -1,10 +1,6 @@
 package quiz.mania.trivia.mcq.question.taglearning
 
 import android.os.Bundle
-import android.view.ViewGroup
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_tag_selection.*
 import quiz.mania.trivia.mcq.question.R
@@ -73,6 +69,23 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
         val db = FirebaseFirestore.getInstance()
         db.collection("questionCollection")
             .whereEqualTo("tags." + tagID,true)
+            .get().addOnSuccessListener {
+
+                //var questions = it.toObjects(QuestionBO::class.java)
+                ///val size = it.documents.size
+                it.documents.forEach {
+                    ///val mData = it.data
+                    val question = it.toObject(QuestionBO::class.java)
+                    val title = question?.title
+                }
+            }
+    }
+
+    private fun fetchQuestion(tagID:String,secondID:String){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("questionCollection")
+            .whereEqualTo("tags." + tagID,true)
+            .whereEqualTo("tags." + secondID,true)
             .get().addOnSuccessListener {
 
                 //var questions = it.toObjects(QuestionBO::class.java)
