@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_tag_selection.*
 import quiz.mania.trivia.mcq.question.R
@@ -22,11 +23,10 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
         // Setup Category Chips
         preferenceCG.setChipSpacing(20)
 
-        val db = FirebaseFirestore.getInstance()
-        db.collection("tagCollection")
+        fetchQuestion("t6wdD8Crp5Q16RIbThi2");
+        /*db.collection("tagCollection")
             ///.whereEqualTo("tagName",tagName)
             .get().addOnSuccessListener {
-                //it.toObjects()
 
                 mTagList = it.toObjects(TagBO::class.java)
 
@@ -63,16 +63,24 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
                     preferenceCG.addView(newChip)
                     num++
                 }
-
-                /*for (document in it) {
-                    ///Log.d("any Value", "${document.id} => ${document.data}")
-                    document.data.forEach {
-                        Log.d("keyValue","${it.key} => ${it.value}")
-                    }
-                }*/
-                //AnalyticsManager(this@TagSelectionActivity).trackEvent("fetchDocument")
-            }
+            }*/
     }
 
     override val layoutId: Int = R.layout.activity_tag_selection
+
+
+    private fun fetchQuestion(tagID:String){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("questionCollection")
+            .whereEqualTo("tags." + tagID,true)
+            .get().addOnSuccessListener {
+
+                //var questions = it.toObjects(QuestionBO::class.java)
+                ///val size = it.documents.size
+                it.documents.forEach {
+                    ///val mData = it.data
+                    val question = it.toObject(QuestionBO::class.java)
+                }
+            }
+    }
 }
