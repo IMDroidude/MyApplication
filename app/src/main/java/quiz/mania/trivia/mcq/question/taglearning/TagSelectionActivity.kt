@@ -2,10 +2,12 @@ package quiz.mania.trivia.mcq.question.taglearning
 
 import android.os.Bundle
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_tag_selection.*
 import quiz.mania.trivia.mcq.question.R
 import quiz.mania.trivia.mcq.question.common.BaseActivity
 import quiz.mania.trivia.mcq.question.databinding.ActivityTagSelectionBinding
+
 
 class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelectionViewModel>(){
 
@@ -19,7 +21,12 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
         // Setup Category Chips
         preferenceCG.setChipSpacing(20)
 
-        fetchQuestion("t6wdD8Crp5Q16RIbThi2");
+        fetchQuestion("t6wdD8Crp5Q16RIbThi2","TtEDg0PcZPBUIvMEnp7D");
+        //fetchQuestion("t6wdD8Crp5Q16RIbThi2");
+
+        ///fetchQuestionPagination()
+
+        //fetchCollectionAfterDocumentID(5)
         /*db.collection("tagCollection")
             ///.whereEqualTo("tagName",tagName)
             .get().addOnSuccessListener {
@@ -65,27 +72,91 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
     override val layoutId: Int = R.layout.activity_tag_selection
 
 
-    private fun fetchQuestion(tagID:String){
+    /*private fun fetchQuestion(tagID:String){
         val db = FirebaseFirestore.getInstance()
         db.collection("questionCollection")
             .whereEqualTo("tags." + tagID,true)
             .get().addOnSuccessListener {
 
                 //var questions = it.toObjects(QuestionBO::class.java)
-                ///val size = it.documents.size
+                val size = it.documents.size
                 it.documents.forEach {
                     ///val mData = it.data
                     val question = it.toObject(QuestionBO::class.java)
                     val title = question?.title
                 }
             }
+    }*/
+
+    private fun fetchQuestionPagination(){
+        val db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("questionCollection")
+
+        var query:Query = collectionReference.orderBy("questionID",
+            Query.Direction.DESCENDING).limit(2)
+        query.get().addOnCompleteListener {
+            if(it.isSuccessful){
+                it.result.let {
+                    it?.let {
+                        val lastVisibleitem = it.documents.get(it.size() -1 )
+                        lastVisibleitem.data.let {
+
+                        }
+
+                        /*val nextQuery: Query = collectionReference.orderBy(
+                            "questionID",
+                            Query.Direction.DESCENDING
+                        ).startAfter(lastVisibleitem).limit(2)
+
+                        nextQuery.get().addOnCompleteListener{
+                            var questions = it.result?.documents?.size
+
+
+                        }*/
+                    }
+                }
+            }
+        }
     }
 
-    private fun fetchQuestion(tagID:String,secondID:String){
+    private fun fetchCollectionAfterDocumentID(limit :Long){
+
         val db = FirebaseFirestore.getInstance()
-        db.collection("questionCollection")
+        var query:Query = db.collection("questionCollection")
+            .startAfter("cDxXGLHlP56xnAp4RmE5")
+            .orderBy("questionID", Query.Direction.DESCENDING)
+        .limit(limit)
+
+        query.get().addOnSuccessListener {
+            var questions = it.toObjects(QuestionBO::class.java) // create a list above and set it to chipGroup or recyclerView
+            questions.size
+        }
+    }
+
+
+    private fun fetchQuestion(vararg tagID:String){
+        val db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("questionCollection")
+
+        var query:Query = collectionReference.orderBy("questionID",
+            Query.Direction.DESCENDING).limit(10)
+
+        for (item in tagID)
+            query = collectionReference.whereEqualTo("tags." + item,true)
+
+        query.get().addOnSuccessListener {
+            //var size = it.documents.size
+
+            var questions = it.toObjects(QuestionBO::class.java) // create a list above and set it to chipGroup or recyclerView
+            /*it.documents.forEach {
+                ///val mData = it.data
+                val question = it.toObject(QuestionBO::class.java)
+            }*/
+
+        }
+        /*db.collection("questionCollection")
             .whereEqualTo("tags." + tagID,true)
-            .whereEqualTo("tags." + secondID,true)
+            .whereEqualTo("tags.TtEDg0PcZPBUIvMEnp7D",true)
             .get().addOnSuccessListener {
 
                 //var questions = it.toObjects(QuestionBO::class.java)
@@ -94,6 +165,6 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
                     ///val mData = it.data
                     val question = it.toObject(QuestionBO::class.java)
                 }
-            }
+            }*/
     }
 }
