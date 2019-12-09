@@ -1,7 +1,12 @@
 package quiz.mania.trivia.mcq.question.utils
 
 import android.content.Context
+import com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.lang.reflect.Type
 import javax.inject.Inject
+
 
 class PrefStore @Inject constructor(context: Context) {
 
@@ -146,8 +151,33 @@ class PrefStore @Inject constructor(context: Context) {
         return prefs.getString(MSISDN, "")
     }
 
+    fun save(key:String,value:String){
+        prefs.edit().putString(key,value).apply()
+    }
+
+    fun read(key: String,default:String) : String{
+        return prefs.getString(key,default)!!
+    }
+
+    fun <T> saveAnyTypeOfObject(key: String, value: T) {
+        save(key, Gson().toJson(value))
+    }
+
+    fun <T> readAnyTypeOfObject(key: String): T {
+        val json = read(key,"{}")
+        return Gson().fromJson(json, object: TypeToken<T>(){}.type)
+    }
+
+    /*fun <T> saveAnyTypeOfList(key:String,dataType :T){
+        val gson = GsonBuilder().create()
+        val Model= gson.fromJson(body,Array<GroupModel>::class.java).toList()
+    }*/
 
 
+    inline fun <reified T> fromJson(json: String): T {
+        return Gson().fromJson(json, object: TypeToken<T>(){}.type)
+    }
+    //inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
 
     companion object {
         private const val IS_LOGGED_IN = "is.logged.in"

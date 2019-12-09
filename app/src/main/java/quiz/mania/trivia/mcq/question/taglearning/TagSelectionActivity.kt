@@ -1,12 +1,17 @@
 package quiz.mania.trivia.mcq.question.taglearning
 
 import android.os.Bundle
+import android.util.Log
+import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_tag_selection.*
 import quiz.mania.trivia.mcq.question.R
 import quiz.mania.trivia.mcq.question.common.BaseActivity
 import quiz.mania.trivia.mcq.question.databinding.ActivityTagSelectionBinding
+import quiz.mania.trivia.mcq.question.models.UserBO
+import quiz.mania.trivia.mcq.question.utils.PrefStore
 
 
 class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelectionViewModel>(){
@@ -21,7 +26,11 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
         // Setup Category Chips
         preferenceCG.setChipSpacing(20)
 
-        fetchQuestion("t6wdD8Crp5Q16RIbThi2","TtEDg0PcZPBUIvMEnp7D");
+        ///fetchQuestion("t6wdD8Crp5Q16RIbThi2","TtEDg0PcZPBUIvMEnp7D");
+
+        fetchUserSelectedTags("Kq5wYN7kkE8mZxochUte")
+
+        ///fetchQuestionAfter("lFynl4dEwRdPBP7YaVBx")
         //fetchQuestion("t6wdD8Crp5Q16RIbThi2");
 
         ///fetchQuestionPagination()
@@ -67,6 +76,20 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
                     num++
                 }
             }*/
+    }
+
+    private fun fetchQuestionAfter(questionID: String) {
+        val db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("questionCollection")
+
+        var query:Query = collectionReference.orderBy("questionID", Query.Direction.DESCENDING)
+            .whereLessThanOrEqualTo("questionID",questionID).limit(5)
+
+        query.get().addOnSuccessListener {
+            var questions = it.toObjects(QuestionBO::class.java) // create a list above and set it to chipGroup or recyclerView
+            val size = questions.size
+        }
+
     }
 
     override val layoutId: Int = R.layout.activity_tag_selection
@@ -134,6 +157,31 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
     }
 
 
+    private fun fetchUserSelectedTags(userID:String){
+        val db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("UserCollection")
+        collectionReference.document(userID).get().addOnCompleteListener {
+
+            if(it.isSuccessful){
+                val querySnapshot = it.result
+                val userBO = querySnapshot?.toObject(UserBO::class.java)
+
+                PrefStore(this@TagSelectionActivity).saveAnyTypeOfObject("userBOkey",userBO);
+
+                val newUser = PrefStore(this@TagSelectionActivity).readAnyTypeOfObject<UserBO>("userBOkey")
+
+                userBO?.favouriteTag?.forEach{
+                    Log.d("keyValue","${it.key}  -> ${it.value}")
+                }
+                ///val tag = it.getResult()?.get("favouriteTag")
+            }
+
+            val callSecondMethod = true;
+        }
+    }
+
+
+
     private fun fetchQuestion(vararg tagID:String){
         val db = FirebaseFirestore.getInstance()
         val collectionReference = db.collection("questionCollection")
@@ -167,4 +215,7 @@ class TagSelectionActivity : BaseActivity<ActivityTagSelectionBinding,TagSelecti
                 }
             }*/
     }
+
+    inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object: TypeToken<T>() {}.type)
+
 }

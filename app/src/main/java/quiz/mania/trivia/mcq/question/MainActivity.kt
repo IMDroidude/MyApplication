@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
         Handler().postDelayed({
             startActivity(Intent(this@MainActivity,TagSelectionActivity::class.java))
-        },2000)
+        },500)
         //viewModel = ViewModelProviders.of(this,MainModelFactory(AlertStore(this@MainActivity)))[MainViewModel::class.java]
 
         //viewModel.showDialog()

@@ -6,17 +6,17 @@ import quiz.mania.trivia.mcq.question.common.BaseViewModel
 import quiz.mania.trivia.mcq.question.ext.ClassLiveData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(): BaseViewModel() {
 
     val onMoveToNext = ClassLiveData()
-    private val mActivity = MainActivity::class
+    private val mActivity = TagSelectionActivity::class
 
     init {
         viewModelScope.launch {
-            delay(3500)
-
+            delay(500)
             onMoveToNext.postValue(mActivity)
 
         }
