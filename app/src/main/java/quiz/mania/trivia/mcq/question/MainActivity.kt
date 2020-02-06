@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
 
-        AnalyticsManager(this@MainActivity).trackEvent("Visited MainActivity");
+        /*AnalyticsManager(this@MainActivity).trackEvent("Visited MainActivity");
 
         ///alertStore.showToast("Hello")
         testClass.getRandomValueFromCTest()
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>() {
 
         Handler().postDelayed({
             startActivity(Intent(this@MainActivity,TagSelectionActivity::class.java))
-        },500)
+        },500)*/
         //viewModel = ViewModelProviders.of(this,MainModelFactory(AlertStore(this@MainActivity)))[MainViewModel::class.java]
 
         //viewModel.showDialog()

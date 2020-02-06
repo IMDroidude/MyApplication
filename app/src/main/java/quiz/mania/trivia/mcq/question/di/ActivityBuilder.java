@@ -6,6 +6,8 @@ import quiz.mania.trivia.mcq.question.Splashy;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import quiz.mania.trivia.mcq.question.TestListActivity;
+import quiz.mania.trivia.mcq.question.bookmvpInteractor.BooksActivity;
+import quiz.mania.trivia.mcq.question.booksmvp.BookDashboard;
 import quiz.mania.trivia.mcq.question.fruitest.FruitActivity;
 import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity;
 
@@ -27,6 +29,20 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     public abstract TagSelectionActivity bindTagSelectionActivity();
+
+    @ContributesAndroidInjector
+    public abstract BooksActivity bindBooksActivity();
+
+    //@ContributesAndroidInjector(modules = {BookDashboardModule.class})
+    /*@ContributesAndroidInjector(modules = {BookEngineModule.class})
+    //@PerActivity
+    ///@ContributesAndroidInjector
+    public abstract BookDashboard bindBookDashboard();*/
+
+    @ContributesAndroidInjector(modules = {BookDashboardModule.class})
+    @ActivityScope
+    public abstract BookDashboard bindBookDashboard();
+
 }
 
 /*@Module

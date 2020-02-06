@@ -14,6 +14,8 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class, // why it is necessary to use this class for injecting purpose
         AppModule::class,
+        InteractorModule::class,
+        UIModule::class,
         ///AndroidSupportInjectionModule::class,
         ///ActivityModule::class,
         ActivityBuilder::class,
@@ -28,6 +30,10 @@ interface AppComponent : AndroidInjector<App> {
     interface Builder {
 
         fun addContext(@BindsInstance context: Context): Builder
+
+        ///fun addBookEngine()
+
+        ///fun addBookEngine(@BindsInstance bookEngineModule: BookEngineModule) :Builder
 
         fun build(): AppComponent
     }

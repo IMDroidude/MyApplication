@@ -9,7 +9,7 @@ import javax.inject.Provider
 @Module
 class AppModule {
 
-    /*@Singleton
+    /*\@Singleton
     @Provides
     fun provideRetrofit(
         client: OkHttpClient,

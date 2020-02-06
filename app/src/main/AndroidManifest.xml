@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaymentTransferActivity"></activity>
+        <activity android:name=".signin.SignInActivity"></activity>
+        <activity android:name=".PaymentTransferActivity" />
         <activity android:name=".TestListActivity" />
         <activity android:name=".Splashy">
             <intent-filter>
@@ -30,8 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".fruitest.FruitActivity" />
-
-        <activity android:name=".taglearning.TagSelectionActivity"></activity>
+        <activity android:name=".taglearning.TagSelectionActivity" />
+        <activity android:name=".booksmvp.BookDashboard"/>
+        <activity android:name=".bookmvpInteractor.BooksActivity"/>
     </application>
 
 </manifest>

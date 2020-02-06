@@ -6,13 +6,16 @@ import quiz.mania.trivia.mcq.question.common.BaseViewModel
 import quiz.mania.trivia.mcq.question.ext.ClassLiveData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import quiz.mania.trivia.mcq.question.bookmvpInteractor.BooksActivity
+import quiz.mania.trivia.mcq.question.booksmvp.BookDashboard
+import quiz.mania.trivia.mcq.question.signin.SignInActivity
 import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(): BaseViewModel() {
 
     val onMoveToNext = ClassLiveData()
-    private val mActivity = TagSelectionActivity::class
+    private val mActivity =  BooksActivity::class//SignInActivity::class// TagSelectionActivity::class
 
     init {
         viewModelScope.launch {
