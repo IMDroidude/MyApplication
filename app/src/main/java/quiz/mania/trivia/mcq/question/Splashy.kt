@@ -14,13 +14,13 @@ class Splashy : BaseActivity<ActivitySplashyBinding,SplashViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        AnalyticsManager(this@Splashy).trackEvent("Visited Splash");
+        /*AnalyticsManager(this@Splashy).trackEvent("Visited Splash");
 
         mViewModel.onMoveToNext.listen(this){
             val intent = Intent(this, it.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
-        }
+        }*/
     }
 
     override val layoutId: Int

@@ -1,15 +1,11 @@
 package quiz.mania.trivia.mcq.question.splash
 
 import androidx.lifecycle.viewModelScope
-import quiz.mania.trivia.mcq.question.MainActivity
-import quiz.mania.trivia.mcq.question.common.BaseViewModel
-import quiz.mania.trivia.mcq.question.ext.ClassLiveData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import quiz.mania.trivia.mcq.question.bookmvpInteractor.BooksActivity
-import quiz.mania.trivia.mcq.question.booksmvp.BookDashboard
-import quiz.mania.trivia.mcq.question.signin.SignInActivity
-import quiz.mania.trivia.mcq.question.taglearning.TagSelectionActivity
+import quiz.mania.trivia.mcq.question.common.BaseViewModel
+import quiz.mania.trivia.mcq.question.ext.ClassLiveData
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(): BaseViewModel() {
