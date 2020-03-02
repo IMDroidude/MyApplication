@@ -19,10 +19,13 @@ public class ImageButtonCustom extends AppCompatImageButton implements View.OnTo
     private RelativeLayout rootView;
     private ImageButtonCustom imageButtonCustom;
     private OnMoveListener onMoveListener;
+    private RingLocation ringLocation;
 
-    public ImageButtonCustom(Context context,RelativeLayout rootView){
+
+    public ImageButtonCustom(Context context,RelativeLayout rootView,RingLocation ringLocation){
         super(context);
         this.rootView = rootView;
+        this.ringLocation = ringLocation;
         init();
 
     }
@@ -45,12 +48,38 @@ public class ImageButtonCustom extends AppCompatImageButton implements View.OnTo
         imageButtonCustom = this;
         setImageResource(R.mipmap.ic_launcher);
         setBackgroundColor(Color.TRANSPARENT);
-        setOnTouchListener(this);
+        ///setOnTouchListener(this);
+
+        setOnTouchListener(new OnDragTouchListener(this, rootView, new OnDragTouchListener.OnDragActionListener() {
+            @Override
+            public void onDragStart(View view) {
+
+            }
+
+            @Override
+            public void onDragEnd(View view) {
+                rootView.invalidate();
+            }
+        }));
 
         /*RelativeLayout.LayoutParams rl = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         rl.addRule(RelativeLayout.ALIGN_BOTTOM);*/
 
-        rootView.addView(this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+        switch (ringLocation){
+            case BOTTOM_LEFT:
+                params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+                break;
+            case TOP_RIGHT:
+                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+                break;
+            case CENTER:
+                params.addRule(RelativeLayout.CENTER_IN_PARENT,RelativeLayout.TRUE);
+                break;
+        }
+        rootView.addView(this,params);
     }
 
     @Override
@@ -92,22 +121,11 @@ public class ImageButtonCustom extends AppCompatImageButton implements View.OnTo
         return getY() + getHeight() / 2;
     }
 
-    public float getParentRight(){
-        return rootView.getRight() - 60;
-    }
-
-    public float getParentTop(){
-        return rootView.getTop() + 60;
-    }
-
-    public float getParentBottom(){
-        return rootView.getBottom() - 60;
-    }
-    public float getParentLeft() {
-        return rootView.getLeft() - 60;
-    }
-
     public interface OnMoveListener{
         void onMove(Position positionXY);
+    }
+
+    public enum RingLocation{
+        BOTTOM_LEFT,TOP_RIGHT,CENTER
     }
 }

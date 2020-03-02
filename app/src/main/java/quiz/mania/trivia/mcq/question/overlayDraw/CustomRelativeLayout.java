@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 public class CustomRelativeLayout extends RelativeLayout {
 
     private Context mContext;
-    private ImageButtonCustom[] imageButtonCustoms = new ImageButtonCustom[3];
+    ///private ImageButtonCustom[] imageButtonCustoms = new ImageButtonCustom[3];
     private Paint paint;
     CustomRelativeLayout customRelativeLayout;
 
@@ -42,9 +42,9 @@ public class CustomRelativeLayout extends RelativeLayout {
         paint.setColor(Color.RED);
         paint.setStrokeWidth((float) 12);
 
-        bottomLeftIv = new ImageButtonCustom(mContext,customRelativeLayout);
-        topRightIv = new ImageButtonCustom(mContext,customRelativeLayout);
-        centerIv = new ImageButtonCustom(mContext,customRelativeLayout);
+        bottomLeftIv = new ImageButtonCustom(mContext,customRelativeLayout, ImageButtonCustom.RingLocation.BOTTOM_LEFT);
+        topRightIv = new ImageButtonCustom(mContext,customRelativeLayout, ImageButtonCustom.RingLocation.TOP_RIGHT);
+        centerIv = new ImageButtonCustom(mContext,customRelativeLayout, ImageButtonCustom.RingLocation.CENTER);
 
         bottomLeftIv.setBackgroundColor(Color.GRAY);
         topRightIv.setBackgroundColor(Color.BLUE);
